@@ -92,6 +92,15 @@
                     }
                 });
 
+                var interval = setInterval(goRight, speedInterval);
+
+                function intSlide(func) {
+                    if (func === 'start') {
+                        interval = setInterval(goRight, speedInterval);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }
 
                 function goRight() {
                     console.log('Je suis dans goRight');
@@ -112,7 +121,7 @@
                     if (nextDot.length === 0) {
                         nextDot = container.find('li').first();
                     }
-                    
+
                     currentDot.removeClass('active__dot').addClass('disable__dot');
                     nextDot.addClass('active__dot').removeClass('disable__dot');
                 }
@@ -137,8 +146,12 @@
 
                 }
 
-                setInterval(goRight, speedInterval);
-                $('.next').click(goRight);
+
+                $('.next').click(function () {
+                    intSlide('stop');
+                    goRight();
+                    intSlide('start');
+                });
                 $('.prev').click(goLeft);
                 $('.dot').click(goRight);
             });
