@@ -108,15 +108,13 @@
                     nextSlide.addClass('image-show').removeClass('image-hidden');
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
 
-                    currentDot.removeClass('active__dot').addClass('disable__dot');
-                    nextDot.addClass('active__dot').removeClass('disable__dot');
 
                     if (nextDot.length === 0) {
                         nextDot = container.find('li').first();
                     }
-
-                    console.log(currentDot.length);
-                    console.log($('.dot'));
+                    
+                    currentDot.removeClass('active__dot').addClass('disable__dot');
+                    nextDot.addClass('active__dot').removeClass('disable__dot');
                 }
 
                 function goLeft() {
