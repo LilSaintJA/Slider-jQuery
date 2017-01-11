@@ -60,12 +60,13 @@
                     dot;
 
                 for (i = 1; i < totalImgs; i += 1) {
-                    dots = dots + '<li class=\'dot\'></li>';
+                    dots = dots + '<li class=\'dot disable__dot\'></li>';
                 }
+                //                console.log(dots);
                 dot = "<ul class=\"slider__dots\">" + dots + "</ul>";
 
                 container.append(dot);
-                console.log(totalImgs);
+                //                console.log(totalImgs);
 
                 // On modifie le style du containerSlide
                 containerSlide.css({
@@ -98,7 +99,6 @@
                         nextSlide = currentSlide.next(),
                         currentDot = $('.active__dot'),
                         nextDot = currentDot.next();
-                    //                    console.log(nextActiveImg);
 
                     if (nextSlide.length === 0) {
                         nextSlide = containerSlide.find('img').first();
@@ -108,8 +108,15 @@
                     nextSlide.addClass('image-show').removeClass('image-hidden');
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
 
-                    currentDot.removeClass('active__dot');
-                    nextDot.addClass('active__dot');
+                    currentDot.removeClass('active__dot').addClass('disable__dot');
+                    nextDot.addClass('active__dot').removeClass('disable__dot');
+
+                    if (nextDot.length === 0) {
+                        nextDot = container.find('li').first();
+                    }
+
+                    console.log(currentDot.length);
+                    console.log($('.dot'));
                 }
 
                 function goLeft() {
