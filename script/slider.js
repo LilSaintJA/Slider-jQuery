@@ -4,6 +4,10 @@
     $(document).ready(function () {
         console.log('jQuery is ready');
 
+        /**
+         * [[Description]]
+         * @param {[[Type]]} options [[Description]]
+         */
         $.fn.slideShow = function (options) {
 
             var nbrSlide,
