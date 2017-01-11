@@ -2,10 +2,11 @@
 (function ($) {
     'use strict';
     $(document).ready(function () {
-        $('a').slideShow({
+        $('.slide-container').slideShow({
             //            slideContainer: '.slide-container',
             nbrSlide: 3,
-            speedInterval: 5000
+            speedInterval: 5000,
+            makeLinks: null
         });
     });
 }(jQuery));
