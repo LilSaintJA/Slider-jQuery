@@ -125,8 +125,13 @@
                     if (jsp == 'optFade') {
                         console.log('je suis dans le if');
 
-                        currentSlide.removeClass('image-show').addClass('image-hidden');
-                        nextSlide.addClass('image-show').removeClass('image-hidden');
+                        currentSlide.removeClass('fadeIn image-show').addClass('image-hidden');
+                        nextSlide.addClass('image-show').removeClass('fadeOut image-hidden');
+                    } else if (jsp == 'optOpa') {
+                        currentSlide.addClass('fadeIn').removeClass('image-show');
+                        console.log(currentSlide);
+                        nextSlide.addClass('fadeOut').removeClass('image-show');
+                        console.log(nextSlide);
                     }
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
 
