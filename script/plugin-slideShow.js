@@ -8,7 +8,8 @@
 
         /**
          * Plugin slideShow
-         * @param   {String, Int} options [Options par defaults du plugin]
+         * @param String options [Options par defaults du plugin]
+         * @param int
          * @returns {Objects jQuery} [[Description]]
          */
         $.fn.slideShow = function (options) {
@@ -57,7 +58,11 @@
                     totalImgs = containerSlide.find('img').length,
                     i,
                     dots = '<li class=\'dot active__dot\'></li>',
-                    dot;
+                    dot,
+                    jsp;
+
+                //                jsp = $('input:radio:checked').val();
+                //                console.log(jsp);
 
                 for (i = 1; i < totalImgs; i += 1) {
                     dots = dots + '<li class=\'dot disable__dot\'></li>';
@@ -90,6 +95,7 @@
                         });
                         $(this).wrap('<a href="' + $(this).attr('alt') + '"></a>');
                     }
+
                 });
 
                 var interval = setInterval(goRight, speedInterval);
@@ -113,8 +119,15 @@
                         nextSlide = containerSlide.find('img').first();
                     }
 
-                    currentSlide.removeClass('image-show').addClass('image-hidden');
-                    nextSlide.addClass('image-show').removeClass('image-hidden');
+                    var jsp = $('input:radio:checked').val();
+                    console.log('Je suis jsp');
+                    console.log(jsp);
+                    if (jsp == 'optFade') {
+                        console.log('je suis dans le if');
+
+                        currentSlide.removeClass('image-show').addClass('image-hidden');
+                        nextSlide.addClass('image-show').removeClass('image-hidden');
+                    }
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
 
 
@@ -124,6 +137,7 @@
 
                     currentDot.removeClass('active__dot').addClass('disable__dot');
                     nextDot.addClass('active__dot').removeClass('disable__dot');
+
                 }
 
                 function goLeft() {
@@ -132,6 +146,7 @@
                         prevSlide = currentSlide.prev(),
                         currentDot = $('.active__dot'),
                         prevDot = currentDot.prev();
+
 
                     if (prevSlide.length === 0) {
                         prevSlide = containerSlide.find('img').last();
@@ -145,7 +160,6 @@
                     prevDot.addClass('active__dot');
 
                 }
-
 
                 $('.next').click(function () {
                     intSlide('stop');
