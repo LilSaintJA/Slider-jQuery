@@ -58,20 +58,14 @@
                     totalImgs = containerSlide.find('img').length,
                     i,
                     dots = '<li class=\'dot active__dot\'></li>',
-                    dot,
-                    jsp;
-
-                //                jsp = $('input:radio:checked').val();
-                //                console.log(jsp);
+                    dot;
 
                 for (i = 1; i < totalImgs; i += 1) {
                     dots = dots + '<li class=\'dot disable__dot\'></li>';
                 }
-                //                console.log(dots);
                 dot = "<ul class=\"slider__dots\">" + dots + "</ul>";
 
                 container.append(dot);
-                //                console.log(totalImgs);
 
                 // On modifie le style du containerSlide
                 containerSlide.css({
@@ -110,7 +104,7 @@
 
                 function goRight() {
                     console.log('Je suis dans goRight');
-                    var currentSlide = $('.active.fadeIn'),
+                    var currentSlide = $('.active'),
                         nextSlide = currentSlide.next(),
                         currentDot = $('.active__dot'),
                         nextDot = currentDot.next();
@@ -122,19 +116,18 @@
                     var jsp = $('input:radio:checked').val();
                     console.log('Je suis jsp');
                     console.log(jsp);
-                    if (jsp == 'optFade') {
-                        console.log('je suis dans le if');
 
-                        currentSlide.removeClass('active');
-                        nextSlide.addClass('active');
-                    } else if (jsp == 'optOpa') {
-                        currentSlide.removeClass('active fadeIn');
-                        console.log(currentSlide);
-                        nextSlide.addClass('fadeIn');
-                        console.log(nextSlide);
+                    switch (jsp) {
+                        case 'optFade':
+                            currentSlide.removeClass('active');
+                            nextSlide.addClass('active');
+                            break;
+
+                        case 'optOpa':
+                            currentSlide.removeClass('active');
+                            nextSlide.addClass('fadeIn');
+                            break;
                     }
-                    //                    containerSlide.find('img').not([currentSlide, nextSlide]);
-
 
                     if (nextDot.length === 0) {
                         nextDot = container.find('li').first();

@@ -57,6 +57,7 @@
                 var containerSlide = $(this),
                     container = $('.slideShow-container'),
                     totalImgs = containerSlide.find('img').length,
+                    timeouts = {},
                     directions = {prev: 'last', next: 'first'},
                     cNames = {a: 'active', s: 'slide', n: 'next', t: 'transition', r: 'reset'};
 
@@ -84,7 +85,20 @@
                     //Start transition
 
                     ele.find('.' + cNames.a + ', .' + cNames.n).addClass(cNames.t);
+                    timeouts.transition = setInterval(function () {
+                        // Reset Old Active
+                        ele.find('.' + cNames.a).addClass(cNames.r);
+                        // Remove classes
+                        ele.find('.' + cNames.s).removeClass(cNames.t + ' ' + cNames.a);
+                        //Make the next element current One
+                        ele.find('.' + cNames.n).removeClass(cNames.n).addClass(cNames.a);
+                        timeouts.reset = setInterval(function () {
+                            ele.find('.' + cNames.r).removeClass(cNames.r);
+                        }, speedInterval);
+                    }, speedInterval - 10);
                 }
+
+                $('.next').click(goRight);
             });
         };
     });
