@@ -119,20 +119,8 @@
                         nextSlide = containerSlide.find('img').first();
                     }
 
-                    var jsp = $('input:radio:checked').val();
-                    console.log('Je suis jsp');
-                    console.log(jsp);
-                    if (jsp == 'optFade') {
-                        console.log('je suis dans le if');
-
-                        currentSlide.removeClass('active');
-                        nextSlide.addClass('active');
-                    } else if (jsp == 'optOpa') {
-                        currentSlide.removeClass('active fadeIn');
-                        console.log(currentSlide);
-                        nextSlide.addClass('fadeIn');
-                        console.log(nextSlide);
-                    }
+                    currentSlide.removeClass('active');
+                    nextSlide.addClass('active');
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
 
 
