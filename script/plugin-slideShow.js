@@ -113,21 +113,8 @@
                         nextSlide = containerSlide.find('img').first();
                     }
 
-                    var jsp = $('input:radio:checked').val();
-                    console.log('Je suis jsp');
-                    console.log(jsp);
-
-                    switch (jsp) {
-                        case 'optFade':
-                            currentSlide.removeClass('active');
-                            nextSlide.addClass('active');
-                            break;
-
-                        case 'optOpa':
-                            currentSlide.removeClass('active');
-                            nextSlide.addClass('fadeIn');
-                            break;
-                    }
+                    currentSlide.removeClass('active');
+                    nextSlide.addClass('active');
 
                     if (nextDot.length === 0) {
                         nextDot = container.find('li').first();
