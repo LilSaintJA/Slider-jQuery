@@ -110,7 +110,7 @@
 
                 function goRight() {
                     console.log('Je suis dans goRight');
-                    var currentSlide = $('.image-show'),
+                    var currentSlide = $('.active.fadeIn'),
                         nextSlide = currentSlide.next(),
                         currentDot = $('.active__dot'),
                         nextDot = currentDot.next();
@@ -125,12 +125,12 @@
                     if (jsp == 'optFade') {
                         console.log('je suis dans le if');
 
-                        currentSlide.removeClass('fadeIn image-show').addClass('image-hidden');
-                        nextSlide.addClass('image-show').removeClass('fadeOut image-hidden');
+                        currentSlide.removeClass('active');
+                        nextSlide.addClass('active');
                     } else if (jsp == 'optOpa') {
-                        currentSlide.addClass('fadeIn').removeClass('image-show');
+                        currentSlide.removeClass('active fadeIn');
                         console.log(currentSlide);
-                        nextSlide.addClass('fadeOut').removeClass('image-show');
+                        nextSlide.addClass('fadeIn');
                         console.log(nextSlide);
                     }
                     //                    containerSlide.find('img').not([currentSlide, nextSlide]);
