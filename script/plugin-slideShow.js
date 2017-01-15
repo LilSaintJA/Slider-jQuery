@@ -110,7 +110,7 @@
 
                 function goRight() {
                     console.log('Je suis dans goRight');
-                    var currentSlide = $('.active.fadeIn'),
+                    var currentSlide = $('.active'),
                         nextSlide = currentSlide.next(),
                         currentDot = $('.active__dot'),
                         nextDot = currentDot.next();
