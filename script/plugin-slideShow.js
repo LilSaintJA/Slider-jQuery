@@ -1,10 +1,8 @@
-/*global console, document, $, jQuery */
+/*global console, document, $, jQuery, goRight, setInterval, clearInterval */
 
 (function ($) {
     'use strict';
     $(document).ready(function () {
-        console.log('jQuery is ready');
-
 
         /**
          * Plugin slideShow
@@ -21,7 +19,6 @@
                 height,
                 scaleWidth,
                 scaleHeight,
-                makeLinks,
                 defaults,
                 settings;
 
@@ -31,13 +28,10 @@
                 width: '940px',                 // Largeur du slideShow
                 height: '360px',                // Hauteur du slideShow
                 scaleWidth: true,               // Largeur par défauts des images
-                scaleHeight: true,              // Hauteur par défauts des images
-                makeLinks: false,
-                callback: null
+                scaleHeight: true               // Hauteur par défauts des images
             };
 
             settings = {};
-            //            console.log(settings);
 
             // On fusionne nos objects 'defaults' et 'options' dans l'objects settings
             $.extend(settings, defaults, options);
@@ -48,7 +42,6 @@
             height = settings.height;
             scaleWidth = settings.scaleWidth;
             scaleHeight = settings.scaleHeight;
-            makeLinks = settings.makeLinks;
 
             // Possibilité d'appliquer le plugin sur tous les objets jQuery
             // Permet d'ajouter notre plugin à une chaine
@@ -58,20 +51,15 @@
                     totalImgs = containerSlide.find('img').length,
                     i,
                     dots = '<li class=\'dot active__dot\'></li>',
-                    dot,
-                    jsp;
-
-                //                jsp = $('input:radio:checked').val();
-                //                console.log(jsp);
+                    dot;
 
                 for (i = 1; i < totalImgs; i += 1) {
                     dots = dots + '<li class=\'dot disable__dot\'></li>';
                 }
-                //                console.log(dots);
+
                 dot = "<ul class=\"slider__dots\">" + dots + "</ul>";
 
                 container.append(dot);
-                //                console.log(totalImgs);
 
                 // On modifie le style du containerSlide
                 containerSlide.css({
@@ -81,21 +69,16 @@
 
                     // Si on doit adapter les dimensions des imgs
                     if (scaleWidth) {
-                        $(this).css('width', '100%');
+                        $(this).css({
+                            width: '100%'
+                        });
                     }
 
                     if (scaleHeight) {
-                        $(this).css('height', '100%');
-                    }
-
-                    if (makeLinks) {
                         $(this).css({
-                            'cursor': 'pointer',
-                            'border': '0'
+                            height: '100%'
                         });
-                        $(this).wrap('<a href="' + $(this).attr('alt') + '"></a>');
                     }
-
                 });
 
                 var interval = setInterval(goRight, speedInterval);
@@ -109,7 +92,6 @@
                 }
 
                 function goRight() {
-                    console.log('Je suis dans goRight');
                     var currentSlide = $('.active'),
                         nextSlide = currentSlide.next(),
                         currentDot = $('.active__dot'),
@@ -121,8 +103,6 @@
 
                     currentSlide.removeClass('active');
                     nextSlide.addClass('active');
-                    //                    containerSlide.find('img').not([currentSlide, nextSlide]);
-
 
                     if (nextDot.length === 0) {
                         nextDot = container.find('li').first();
@@ -134,8 +114,7 @@
                 }
 
                 function goLeft() {
-                    console.log('Je suis dans goLeft');
-                    var currentSlide = $('.image-show'),
+                    var currentSlide = $('.active'),
                         prevSlide = currentSlide.prev(),
                         currentDot = $('.active__dot'),
                         prevDot = currentDot.prev();
@@ -145,9 +124,8 @@
                         prevSlide = containerSlide.find('img').last();
                     }
 
-                    currentSlide.removeClass('image-show').addClass('image-hidden');
-                    prevSlide.addClass('image-show').removeClass('image-hidden');
-                    containerSlide.find('img').not([currentSlide, prevSlide]);
+                    currentSlide.removeClass('active');
+                    prevSlide.addClass('active');
 
                     currentDot.removeClass('active__dot');
                     prevDot.addClass('active__dot');
@@ -159,6 +137,7 @@
                     goRight();
                     intSlide('start');
                 });
+
                 $('.prev').click(goLeft);
                 $('.dot').click(goRight);
             });
